@@ -4,6 +4,7 @@ using System.Drawing;
 using System.IO;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 
 namespace sd
 {
@@ -178,7 +179,7 @@ namespace sd
             }
             else
             {
-                return double.Parse(s);
+                return double.Parse(s, CultureInfo.InvariantCulture);
             }
         }
 

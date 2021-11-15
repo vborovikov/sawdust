@@ -4,6 +4,7 @@ using System.Text;
 using System.Drawing;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 
 namespace sd
 {
@@ -81,14 +82,10 @@ namespace sd
 
         public static double ParseDouble(string s, double d)
         {
-            try
-            {
-                return double.Parse(s);
-            }
-            catch
-            {
-                return d;
-            }
+                //todo: investigate if we can get rid of strings
+                return 
+                    double.TryParse(s, NumberStyles.Float, CultureInfo.InvariantCulture, out var result) ||
+                    double.TryParse(s, NumberStyles.Float, CultureInfo.CurrentCulture, out result) ? result : d;
         }
 
         public static bool AnySegmentsTouch(List<xy> p1, List<xy> p2)
